@@ -2,15 +2,16 @@
   <library name="ex_license" type="mix">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/_build/dev/lib/ex_license/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/ex_license/ebin" />
       <root url="file://$PROJECT_DIR$/_build/dev/lib/ex_license/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/ex_license/ebin" />
       <root url="file://$PROJECT_DIR$/_build/dev/lib/ex_license/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/ex_license/ebin" />
       <root url="file://$PROJECT_DIR$/_build/dev/lib/ex_license/ebin" />
-      <root url="file://$PROJECT_DIR$/_build/dev/lib/ex_license/ebin" />
-      <root url="file://$PROJECT_DIR$/_build/dev/lib/ex_license/ebin" />
+      <root url="file://$PROJECT_DIR$/_build/test/lib/ex_license/ebin" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/deps/ex_license/lib" />
       <root url="file://$PROJECT_DIR$/deps/ex_license/lib" />
       <root url="file://$PROJECT_DIR$/deps/ex_license/lib" />
     </SOURCES>
