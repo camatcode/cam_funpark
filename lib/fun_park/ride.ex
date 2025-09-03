@@ -13,9 +13,17 @@ defmodule FunPark.Ride do
     tags: []
   ]
 
+  def make(%Ride{} = r), do: r
+
+  def make(m) when is_map(m) do
+    opts = Enum.map(m, fn {key, value} -> {key, value} end)
+    name = Map.get(m, :name)
+    make(name, opts)
+  end
+
   def make(name, opts \\ []) when is_binary(name) do
     %Ride{
-      id: :erlang.unique_integer([:positive, :monotonic]),
+      id: System.monotonic_time() |> abs(),
       name: name,
       min_age: Keyword.get(opts, :min_age, 0),
       min_height: Keyword.get(opts, :min_height, 0),
@@ -23,5 +31,10 @@ defmodule FunPark.Ride do
       online: Keyword.get(opts, :online, true),
       tags: Keyword.get(opts, :tags, [])
     }
+  end
+
+  def change(%Ride{} = ride, %{} = attrs) do
+    Map.delete(attrs, :id)
+    |> then(&struct(ride, &1))
   end
 end

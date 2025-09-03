@@ -1,6 +1,7 @@
 defmodule FunPark.PatronTest do
-  use ExUnit.Case
+  use FunPark.DataCase
 
+  alias FunPark.Eq
   alias FunPark.FastPass
   alias FunPark.Patron
   alias FunPark.Ride
@@ -25,5 +26,16 @@ defmodule FunPark.PatronTest do
              ticket_tier: :basic,
              fast_passes: [^fast_pass]
            } = Patron.make(name, age, height, fast_passes: [fast_pass])
+  end
+
+  test "Chapter 2. Implement Domain-Specific Equality with Protocols" do
+    # page 12 - 13
+    to_change = build(:patron)
+    changed = Patron.change(to_change, %{ticket_tier: :premium})
+    refute to_change == changed
+    assert changed.ticket_tier == :premium
+
+    assert Eq.eq?(to_change, changed)
+    refute Eq.not_eq?(to_change, changed)
   end
 end
