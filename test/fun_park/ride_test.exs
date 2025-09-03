@@ -1,6 +1,7 @@
 defmodule FunPark.RideTest do
   use FunPark.DataCase
 
+  alias FunPark.Eq
   alias FunPark.Ride
 
   @moduletag :capture_log
@@ -32,14 +33,29 @@ defmodule FunPark.RideTest do
            } = Ride.make("Dark Mansion", min_age: 14, tags: [:dark])
   end
 
+  test "Chapter 2. Implement Equality for FunPark Contexts" do
+    # page 15
+    ride_a = build(:ride)
+    ride_b = Ride.change(ride_a, %{wait_time: 20})
+    assert ride_b.wait_time == 20
+    refute ride_a == ride_b
+    assert Eq.eq?(ride_a, ride_b)
+    refute Eq.not_eq?(ride_a, ride_b)
+  end
+
   test "Define your own Rides" do
-    random_ride = build(:ride)
-    assert %Ride{} = random_ride
-    assert random_ride.id
-    assert random_ride.name
-    assert random_ride.min_age
-    assert random_ride.min_height
-    refute is_nil(random_ride.online)
-    assert random_ride.tags
+    random_rides = build_list(1000, :ride)
+    refute Enum.empty?(random_rides)
+
+    assert Enum.each(random_rides, fn
+             random_ride ->
+               assert %Ride{} = random_ride
+               assert random_ride.id
+               assert random_ride.name
+               assert random_ride.min_age
+               assert random_ride.min_height
+               refute is_nil(random_ride.online)
+               assert random_ride.tags
+           end)
   end
 end

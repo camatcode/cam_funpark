@@ -18,4 +18,9 @@ defmodule FunPark.Patron do
       dislikes: Keyword.get(opts, :dislikes, [])
     }
   end
+
+  def change(%Patron{} = patron, %{} = attrs) do
+    Map.delete(attrs, :id)
+    |> then(&struct(patron, &1))
+  end
 end

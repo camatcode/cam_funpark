@@ -32,4 +32,9 @@ defmodule FunPark.Ride do
       tags: Keyword.get(opts, :tags, [])
     }
   end
+
+  def change(%Ride{} = ride, %{} = attrs) do
+    Map.delete(attrs, :id)
+    |> then(&struct(ride, &1))
+  end
 end
