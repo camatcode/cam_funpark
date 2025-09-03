@@ -23,5 +23,4 @@ defimpl FunPark.Ord, for: FunPark.Ride do
   def le?(%Ride{name: v1}, %Ride{name: v2}), do: Ord.le?(v1, v2)
   def gt?(%Ride{name: v1}, %Ride{name: v2}), do: Ord.gt?(v1, v2)
   def ge?(%Ride{name: v1}, %Ride{name: v2}), do: Ord.ge?(v1, v2)
-  #
 end
