@@ -11,7 +11,7 @@ defmodule FunPark.Factory.RideFactory do
 
         %{
           name: Faker.Lorem.words(2) |> Enum.join(" "),
-          min_age: Enum.random(0..100),
+          min_age: Enum.random(0..10),
           min_height: Enum.random(0..200),
           wait_time: Enum.random(0..5000),
           online: Enum.random([true, false]),

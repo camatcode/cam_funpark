@@ -7,9 +7,15 @@ defmodule FunPark.FastPass do
 
   defstruct [:id, :ride, :time]
 
+  def make(%FastPass{} = fp), do: fp
+
+  def make(%{ride: ride, time: time} = m) when is_map(m) do
+    make(ride, time)
+  end
+
   def make(%Ride{} = ride, %DateTime{} = time) do
     %FastPass{
-      id: :erlang.unique_integer([:positive, :monotonic]),
+      id: System.monotonic_time() |> abs(),
       ride: ride,
       time: time
     }

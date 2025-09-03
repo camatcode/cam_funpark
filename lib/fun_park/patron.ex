@@ -4,10 +4,17 @@ defmodule FunPark.Patron do
 
   defstruct [:id, :name, age: 0, height: 0, ticket_tier: :basic, fast_passes: [], reward_points: 0, likes: [], dislikes: []]
 
+  def make(%Patron{} = p), do: p
+
+  def make(%{name: name, age: age, height: height} = m) when is_map(m) do
+    opts = Enum.map(m, fn {key, value} -> {key, value} end)
+    make(name, age, height, opts)
+  end
+
   def make(name, age, height, opts \\ [])
       when is_bitstring(name) and is_integer(age) and is_integer(height) and age > 0 and height > 0 do
     %Patron{
-      id: :erlang.unique_integer([:positive, :monotonic]),
+      id: System.monotonic_time() |> abs(),
       name: name,
       age: age,
       height: height,
