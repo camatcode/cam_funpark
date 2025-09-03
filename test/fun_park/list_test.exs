@@ -63,6 +63,5 @@ defmodule FunPark.ListTest do
   end
 
   test "Chapter 2. Act on it" do
-
   end
 end
