@@ -3,7 +3,7 @@
 Cam's version of FunPark -
 from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragprog.com/titles/jkelixir/advanced-functional-programming-with-elixir/)
 
-# Progress Tracker
+# Progress Tracker / Initial Notes
 
 - [x] Introduction
     - [x] How This Book Works
@@ -25,8 +25,7 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
     - [x] Transform Inputs Before Matching
     - [x] Harness Equality for Collections
     - [x] What We’ve Learned
-- [x] Chapter 3: Create Flexible Ordering with
-  Protocols ([work/chapter-3](https://github.com/camatcode/cam_funpark/tree/work/chapter-3))
+- [x] Chapter 3: Create Flexible Ordering with Protocols ([work/chapter-3](https://github.com/camatcode/cam_funpark/tree/work/chapter-3))
     - [x] Define Order with a Protocol
     - [x] Implement Order for FunPark Contexts
     - [x] Transform Inputs Before Comparison
@@ -35,7 +34,7 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
     - [x] Reduce Repetitive Code with Macros
         - 📝: It's unwise to drop folks into metaprogramming without more detail
     - [x] What We’ve Learned
-- [ ] Chapter 4: Combine with Monoids
+- [ ] Chapter 4: Combine with Monoids ([work/chapter-4](https://github.com/camatcode/cam_funpark/tree/work/chapter-4))
     - [ ] Define the Protocol
     - [ ] Combine Numbers with Sum
     - [ ] Combine Equality
