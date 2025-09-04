@@ -13,5 +13,10 @@ defmodule FunPark.OrdTest do
     refute Ord.gt?(1, 2)
     assert Ord.ge?(2, 2)
     assert Ord.le?(2, 2)
+
+    # page 38
+    assert :eq == Ord.Utils.compare(1, 1)
+    assert :lt == Ord.Utils.compare(1, 2)
+    assert :gt == Ord.Utils.compare(1, 0)
   end
 end

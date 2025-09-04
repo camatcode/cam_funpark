@@ -2,6 +2,7 @@ defmodule FunPark.RideTest do
   use FunPark.DataCase
 
   alias FunPark.Eq
+  alias FunPark.List, as: FPList
   alias FunPark.Ord
   alias FunPark.Ride
 
@@ -50,6 +51,22 @@ defmodule FunPark.RideTest do
 
     refute apple_cart < banana_slip
     assert Ord.lt?(apple_cart, banana_slip)
+
+    assert :eq == Ord.Utils.compare(apple_cart, apple_cart)
+    assert :lt == Ord.Utils.compare(apple_cart, banana_slip)
+    assert :gt == Ord.Utils.compare(banana_slip, apple_cart)
+
+    # page 39
+    assert [apple_cart, banana_slip] == FPList.sort([banana_slip, apple_cart])
+
+    # page 40
+    tea_cup = build(:ride, name: "Tea Cup", wait_time: 40)
+    haunted_mansion = build(:ride, name: "Haunted Mansion", wait_time: 20)
+    river_ride = build(:ride, name: "River Ride", wait_time: 40)
+    rides = [tea_cup, haunted_mansion, river_ride]
+    ord_wait_time = Ride.ord_by_wait_time()
+    assert [haunted_mansion, tea_cup, river_ride] == FPList.sort(rides, ord_wait_time)
+    assert [haunted_mansion, tea_cup] == FPList.strict_sort(rides, ord_wait_time)
   end
 
   test "Define your own Rides" do

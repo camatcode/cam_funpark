@@ -60,6 +60,12 @@ defmodule FunPark.ListTest do
     fast_pass_rides = [haunted_mansion]
     rides_completed = [tea_cup, banana_slip, haunted_mansion]
     assert FPList.superset?(rides_completed, fast_pass_rides)
-  endls
+  end
 
+  test "Chapter 3. Hardness Order for Collections" do
+    # page 39
+    assert [:apple, :banana, :pear] = FPList.sort([:banana, :pear, :apple])
+    # page 40
+    assert [:apple, :banana, :orange] = FPList.strict_sort([:banana, :orange, :banana, :apple])
+  end
 end
