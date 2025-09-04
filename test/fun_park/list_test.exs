@@ -61,7 +61,4 @@ defmodule FunPark.ListTest do
     rides_completed = [tea_cup, banana_slip, haunted_mansion]
     assert FPList.superset?(rides_completed, fast_pass_rides)
   end
-
-  test "Chapter 2. Act on it" do
-  end
 end
