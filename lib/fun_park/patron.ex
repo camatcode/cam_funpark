@@ -1,9 +1,13 @@
 defmodule FunPark.Patron do
   @moduledoc false
+  import FunPark.Macros, only: [ord_for: 2]
+
   alias __MODULE__, as: Patron
   alias FunPark.Ord
 
   defstruct [:id, :name, age: 0, height: 0, ticket_tier: :basic, fast_passes: [], reward_points: 0, likes: [], dislikes: []]
+
+  ord_for(Patron, :name)
 
   def make(%Patron{} = p), do: p
 
