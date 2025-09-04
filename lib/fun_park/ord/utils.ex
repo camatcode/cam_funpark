@@ -24,6 +24,17 @@ defmodule FunPark.Ord.Utils do
     end
   end
 
+  def reverse(ord \\ Ord) do
+    ord = to_ord_map(ord)
+
+    %{
+      lt?: ord.gt?,
+      le?: ord.ge?,
+      gt?: ord.lt?,
+      ge?: ord.le?
+    }
+  end
+
   def comparator(ord_module), do: fn a, b -> compare(a, b, ord_module) != :gt end
 
   def to_ord_map(%{lt?: lt_f, le?: le_f, gt?: gt_f, ge?: ge_f} = ord_map)

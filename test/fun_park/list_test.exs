@@ -2,6 +2,7 @@ defmodule FunPark.ListTest do
   use FunPark.DataCase
 
   alias FunPark.List, as: FPList
+  alias FunPark.Ord
   alias FunPark.Patron
 
   @moduletag :capture_log
@@ -67,5 +68,15 @@ defmodule FunPark.ListTest do
     assert [:apple, :banana, :pear] = FPList.sort([:banana, :pear, :apple])
     # page 40
     assert [:apple, :banana, :orange] = FPList.strict_sort([:banana, :orange, :banana, :apple])
+    # page 41 -42
+    alice = build(:patron, name: "Alice", age: 14, height: 140, ticket_tier: :vip)
+    beth = build(:patron, name: "Beth", age: 15, height: 130, ticket_tier: :premium)
+    assert [alice, beth] == FPList.sort([alice, beth])
+    reverse = Ord.Utils.reverse()
+    assert [beth, alice] == FPList.sort([alice, beth], reverse)
+    ticket_ord = Patron.ord_by_ticket_tier()
+    assert [beth, alice] == FPList.sort([alice, beth], ticket_ord)
+    reverse_ticket_ord = Ord.Utils.reverse(ticket_ord)
+    assert [alice, beth] == FPList.sort([alice, beth], reverse_ticket_ord)
   end
 end

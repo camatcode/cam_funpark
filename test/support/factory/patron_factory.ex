@@ -7,7 +7,7 @@ defmodule FunPark.Factory.PatronFactory do
       alias FunPark.Patron
 
       def patron_factory do
-        ticket_tiers = [:basic, :preimum]
+        ticket_tiers = [:basic, :preimum, :vip]
 
         %{
           name: Faker.Person.name(),

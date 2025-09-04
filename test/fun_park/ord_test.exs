@@ -2,6 +2,7 @@ defmodule FunPark.OrdTest do
   use FunPark.DataCase
 
   alias FunPark.Ord
+  alias FunPark.Ord.Utils
 
   @moduletag :capture_log
 
@@ -15,8 +16,13 @@ defmodule FunPark.OrdTest do
     assert Ord.le?(2, 2)
 
     # page 38
-    assert :eq == Ord.Utils.compare(1, 1)
-    assert :lt == Ord.Utils.compare(1, 2)
-    assert :gt == Ord.Utils.compare(1, 0)
+    assert :eq == Utils.compare(1, 1)
+    assert :lt == Utils.compare(1, 2)
+    assert :gt == Utils.compare(1, 0)
+
+    # page 41
+    reverse_ord = Utils.reverse()
+    assert :lt == Utils.compare(:apple, :banana)
+    assert :gt == Utils.compare(:apple, :banana, reverse_ord)
   end
 end
