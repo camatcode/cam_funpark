@@ -8,6 +8,7 @@ defmodule FunPark.OrdTest do
   doctest Ord
 
   test "Chapter 3. Implement Order for FunPark Contexts" do
+    # page 31
     assert Ord.lt?(1, 2)
     refute Ord.gt?(1, 2)
     assert Ord.ge?(2, 2)

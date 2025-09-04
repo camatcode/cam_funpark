@@ -2,6 +2,7 @@ defmodule FunPark.RideTest do
   use FunPark.DataCase
 
   alias FunPark.Eq
+  alias FunPark.Ord
   alias FunPark.Ride
 
   @moduletag :capture_log
@@ -41,6 +42,14 @@ defmodule FunPark.RideTest do
     refute ride_a == ride_b
     assert Eq.eq?(ride_a, ride_b)
     refute Eq.not_eq?(ride_a, ride_b)
+  end
+
+  test "Chapter 3. Create Flexible Ordering with Protocols" do
+    banana_slip = build(:ride, id: 1, name: "Banana Slip")
+    apple_cart = build(:ride, name: "Apple Cart")
+
+    refute apple_cart < banana_slip
+    assert Ord.lt?(apple_cart, banana_slip)
   end
 
   test "Define your own Rides" do
