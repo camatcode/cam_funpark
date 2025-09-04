@@ -38,4 +38,16 @@ defmodule FunPark.PatronTest do
     assert Eq.eq?(to_change, changed)
     refute Eq.not_eq?(to_change, changed)
   end
+
+  test "Chapter 3. Create Flexible Ordering with Protocols" do
+    # page 36
+    alice = build(:patron, name: "Alice", ticket_tier: :premium)
+    beth = build(:patron, name: "Beth", ticket_tier: :basic)
+
+    ticket_ord = Patron.ord_by_ticket_tier()
+    assert ticket_ord.gt?.(alice, beth)
+
+    beth = Patron.change(beth, %{ticket_tier: :vip})
+    assert ticket_ord.gt?.(beth, alice)
+  end
 end
