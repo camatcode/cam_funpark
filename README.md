@@ -1,89 +1,94 @@
 # FunPark
 
-Cam's version of FunPark - from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragprog.com/titles/jkelixir/advanced-functional-programming-with-elixir/)
+Cam's version of FunPark -
+from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragprog.com/titles/jkelixir/advanced-functional-programming-with-elixir/)
 
 # Progress Tracker
 
 - [x] Introduction
-  - [x] How This Book Works
-  - [x] Who This Book Is For
-  - [x] Online Resources
-  - [x] Conventions Used In This Book
-- [x] Chapeter 1: Build FunPark: Model Real-World Data ([work/chapter-1](https://github.com/camatcode/cam_funpark/tree/work/chapter-1))
-  - [x] Define the Ride Model
-  - [x] Implement Fast Passes for Priority Access
-  - [x] Model the Patrons
-  - [x] Speak the Language
-  - [x] What We’ve Learned  
-- [x] Chapter 2: Implement Domain-Specific Equality with Protocols ([work/chapter-2](https://github.com/camatcode/cam_funpark/tree/work/chapter-2))
-  - [x] Polymorphic Equality
-  - [x] Implement Equality for FunPark Contexts
-  - [x] Equality Is Contextual
-  - [x] Transform Inputs Before Matching
-  - [x] Harness Equality for Collections
-  - [x] What We’ve Learned
-- [ ] Chapter 3: Create Flexible Ordering with Protocols ([work/chapter-3](https://github.com/camatcode/cam_funpark/tree/work/chapter-3))
-  - [x] Define Order with a Protocol
-  - [ ] Implement Order for FunPark Contexts
-  - [ ] Transform Inputs Before Comparison
-  - [ ] Harness Order for Collections
-  - [ ] Reverse the Order
-  - [ ] Reduce Repetitive Code with Macros
-  - [ ] What We’ve Learned
+    - [x] How This Book Works
+    - [x] Who This Book Is For
+    - [x] Online Resources
+    - [x] Conventions Used In This Book
+- [x] Chapeter 1: Build FunPark: Model Real-World
+  Data ([work/chapter-1](https://github.com/camatcode/cam_funpark/tree/work/chapter-1))
+    - [x] Define the Ride Model
+    - [x] Implement Fast Passes for Priority Access
+    - [x] Model the Patrons
+    - [x] Speak the Language
+    - [x] What We’ve Learned
+- [x] Chapter 2: Implement Domain-Specific Equality with
+  Protocols ([work/chapter-2](https://github.com/camatcode/cam_funpark/tree/work/chapter-2))
+    - [x] Polymorphic Equality
+    - [x] Implement Equality for FunPark Contexts
+    - [x] Equality Is Contextual
+    - [x] Transform Inputs Before Matching
+    - [x] Harness Equality for Collections
+    - [x] What We’ve Learned
+- [x] Chapter 3: Create Flexible Ordering with
+  Protocols ([work/chapter-3](https://github.com/camatcode/cam_funpark/tree/work/chapter-3))
+    - [x] Define Order with a Protocol
+    - [x] Implement Order for FunPark Contexts
+    - [x] Transform Inputs Before Comparison
+    - [x] Harness Order for Collections
+    - [x] Reverse the Order
+    - [x] Reduce Repetitive Code with Macros
+        - 📝: It's unwise to drop folks into metaprogramming without more detail
+    - [x] What We’ve Learned
 - [ ] Chapter 4: Combine with Monoids
-  - [ ] Define the Protocol
-  - [ ] Combine Numbers with Sum
-  - [ ] Combine Equality
-  - [ ] Combine Order
-  - [ ] Generalize Maximum
-  - [ ] Manage Complexity
-  - [ ] What We’ve Learned
+    - [ ] Define the Protocol
+    - [ ] Combine Numbers with Sum
+    - [ ] Combine Equality
+    - [ ] Combine Order
+    - [ ] Generalize Maximum
+    - [ ] Manage Complexity
+    - [ ] What We’ve Learned
 - [ ] Chapter 5: Define Logic with Predicates
-  - [ ] Simple Predicates
-  - [ ] Combine Predicates
-  - [ ] Predicates That Span Contexts
-  - [ ] Compose Multi-Arity Functions with Curry
-  - [ ] Harness Predicates for Collections
-  - [ ] Model the FastPass
-  - [ ] Fold Conditional Logic
-  - [ ] What We’ve Learned
+    - [ ] Simple Predicates
+    - [ ] Combine Predicates
+    - [ ] Predicates That Span Contexts
+    - [ ] Compose Multi-Arity Functions with Curry
+    - [ ] Harness Predicates for Collections
+    - [ ] Model the FastPass
+    - [ ] Fold Conditional Logic
+    - [ ] What We’ve Learned
 - [ ] Chapter 6: Compose in Context with Monads
-  - [ ] Build the Monad
-  - [ ] Model Neutrality with Identity
-  - [ ] What We’ve Learned
+    - [ ] Build the Monad
+    - [ ] Model Neutrality with Identity
+    - [ ] What We’ve Learned
 - [ ] Chapter 7: Access Shared Environment with Reader
-  - [ ] Build the Structures
-  - [ ] Monad Behaviors
-  - [ ] Avoid Prop Drilling
-  - [ ] Dependency Injection
-  - [ ] Shared Configuration
-  - [ ] What We Learned
+    - [ ] Build the Structures
+    - [ ] Monad Behaviors
+    - [ ] Avoid Prop Drilling
+    - [ ] Dependency Injection
+    - [ ] Shared Configuration
+    - [ ] What We Learned
 - [ ] Chapter 8: Manage Absence with Maybe
-  - [ ] Build the Structures
-  - [ ] Fold Branches
-  - [ ] Lift Other Contexts
-  - [ ] Bridge Elixir Patterns
-  - [ ] Define Equality
-  - [ ] Establish Order
-  - [ ] Lift Custom Comparisons
-  - [ ] Model Absence in a Monoid
-  - [ ] Implement the Monadic Behaviors
-  - [ ] Refine Lists
-  - [ ] Filter Within Composition
-  - [ ] What We’ve Learned
+    - [ ] Build the Structures
+    - [ ] Fold Branches
+    - [ ] Lift Other Contexts
+    - [ ] Bridge Elixir Patterns
+    - [ ] Define Equality
+    - [ ] Establish Order
+    - [ ] Lift Custom Comparisons
+    - [ ] Model Absence in a Monoid
+    - [ ] Implement the Monadic Behaviors
+    - [ ] Refine Lists
+    - [ ] Filter Within Composition
+    - [ ] What We’ve Learned
 - [ ] Chapter 9: Model Outcomes with Either
-  - [ ] Structure of Either
-  - [ ] Validation
-  - [ ] From Bind to Combine
-  - [ ] Make Errors Explicit
-  - [ ] What We’ve Learned
+    - [ ] Structure of Either
+    - [ ] Validation
+    - [ ] From Bind to Combine
+    - [ ] Make Errors Explicit
+    - [ ] What We’ve Learned
 - [ ] Chapter 10: Coordinate Tasks with Effect
-  - [ ] Build the Effect
-  - [ ] Deferred Transformation
-  - [ ] Effectful Store
-  - [ ] Maintenance Repository
-  - [ ] Inject Behavior, Not Configuration
-  - [ ] Flip the Logic
-  - [ ] What We’ve Learned
+    - [ ] Build the Effect
+    - [ ] Deferred Transformation
+    - [ ] Effectful Store
+    - [ ] Maintenance Repository
+    - [ ] Inject Behavior, Not Configuration
+    - [ ] Flip the Logic
+    - [ ] What We’ve Learned
 
 
