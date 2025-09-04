@@ -1,8 +1,13 @@
 defmodule FunPark.Patron do
   @moduledoc false
+  import FunPark.Macros, only: [ord_for: 2]
+
   alias __MODULE__, as: Patron
+  alias FunPark.Ord
 
   defstruct [:id, :name, age: 0, height: 0, ticket_tier: :basic, fast_passes: [], reward_points: 0, likes: [], dislikes: []]
+
+  ord_for(Patron, :name)
 
   def make(%Patron{} = p), do: p
 
@@ -30,4 +35,12 @@ defmodule FunPark.Patron do
     Map.delete(attrs, :id)
     |> then(&struct(patron, &1))
   end
+
+  def ord_by_ticket_tier, do: Ord.Utils.contramap(&get_ticket_tier_priority/1)
+
+  defp tier_priority(:vip), do: 3
+  defp tier_priority(:premium), do: 2
+  defp tier_priority(:basic), do: 1
+  defp tier_priority(_), do: 0
+  defp get_ticket_tier_priority(%Patron{ticket_tier: tier}), do: tier_priority(tier)
 end

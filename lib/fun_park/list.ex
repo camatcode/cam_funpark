@@ -1,12 +1,13 @@
 defmodule FunPark.List do
   @moduledoc false
 
-  alias FunPark.Eq.Utils
+  alias FunPark.Eq
+  alias FunPark.Ord
 
   def uniq(list, eq \\ FunPark.Eq) when is_list(list) do
     list
     |> Enum.reduce([], fn item, acc ->
-      if Enum.any?(acc, &Utils.eq?(item, &1, eq)),
+      if Enum.any?(acc, &Eq.Utils.eq?(item, &1, eq)),
         do: acc,
         else: [item | acc]
     end)
@@ -20,7 +21,7 @@ defmodule FunPark.List do
   def intersection(list1, list2, eq \\ FunPark.Eq) when is_list(list1) and is_list(list2) do
     list1
     |> Enum.filter(fn item ->
-      Enum.any?(list2, &Utils.eq?(item, &1, eq))
+      Enum.any?(list2, &Eq.Utils.eq?(item, &1, eq))
     end)
     |> uniq()
   end
@@ -28,7 +29,7 @@ defmodule FunPark.List do
   def difference(list1, list2, eq \\ FunPark.Eq) when is_list(list1) and is_list(list2) do
     list1
     |> Enum.reject(fn item ->
-      Enum.any?(list2, &Utils.eq?(item, &1, eq))
+      Enum.any?(list2, &Eq.Utils.eq?(item, &1, eq))
     end)
     |> uniq()
   end
@@ -39,10 +40,18 @@ defmodule FunPark.List do
   end
 
   def subset?(small, large, eq \\ FunPark.Eq) when is_list(small) and is_list(large) do
-    Enum.all?(small, fn item -> Enum.any?(large, &Utils.eq?(item, &1, eq)) end)
+    Enum.all?(small, fn item -> Enum.any?(large, &Eq.Utils.eq?(item, &1, eq)) end)
   end
 
   def superset?(large, small, eq \\ FunPark.Eq) when is_list(small) and is_list(large) do
     subset?(small, large, eq)
+  end
+
+  def sort(list, ord \\ FunPark.Ord) when is_list(list), do: Enum.sort(list, Ord.Utils.comparator(ord))
+
+  def strict_sort(list, ord \\ FunPark.Ord) when is_list(list) do
+    list
+    |> uniq(Ord.Utils.to_eq(ord))
+    |> sort(ord)
   end
 end

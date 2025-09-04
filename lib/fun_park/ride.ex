@@ -2,6 +2,7 @@ defmodule FunPark.Ride do
   @moduledoc false
 
   alias __MODULE__, as: Ride
+  alias FunPark.Ord
 
   defstruct [
     :id,
@@ -36,5 +37,11 @@ defmodule FunPark.Ride do
   def change(%Ride{} = ride, %{} = attrs) do
     Map.delete(attrs, :id)
     |> then(&struct(ride, &1))
+  end
+
+  def get_wait_time(%Ride{wait_time: wait_time}), do: wait_time
+
+  def ord_by_wait_time do
+    Ord.Utils.contramap(&get_wait_time/1)
   end
 end
