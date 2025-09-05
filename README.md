@@ -38,9 +38,11 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
         - 📝: "Do you fully understand `contramap/1`?" No, in fact, it seems to be an unnecessary complication, but I'm
           pressing forward until I recognize why its useful, or what I can replace it with
 - [ ] Chapter 4: Combine with Monoids ([work/chapter-4](https://github.com/camatcode/cam_funpark/tree/work/chapter-4))
-    - [ ] Define the Protocol
-    - [ ] Combine Numbers with Sum
+    - [x] Define the Protocol
+    - [x] Combine Numbers with Sum
     - [ ] Combine Equality
+        - ? Had to implement eq_ride ; did I miss that?
+        - 📝: It's at this exact point where it's clear im re-implementing Haskel in Elixir.
     - [ ] Combine Order
     - [ ] Generalize Maximum
     - [ ] Manage Complexity

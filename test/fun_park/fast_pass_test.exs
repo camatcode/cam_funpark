@@ -79,4 +79,27 @@ defmodule FunPark.FastPassTest do
     fast_pass_1 = FastPass.change(fast_pass_1, %{time: datetime_3})
     assert Ord.gt?(fast_pass_1, fast_pass_2)
   end
+
+  test "Chapter 4. Combine Equality" do
+    # page 53
+    datetime = Faker.DateTime.forward(1)
+    apple = build(:ride, name: "Apple")
+    fast_pass_a = build(:fast_pass, ride: apple, time: datetime)
+    fast_pass_b = build(:fast_pass, ride: apple, time: datetime)
+
+    eq_ride = FastPass.eq_ride()
+    eq_time = FastPass.eq_time()
+    eq_both = Eq.Utils.concat_all([eq_ride, eq_time])
+
+    refute Eq.Utils.eq?(fast_pass_a, fast_pass_b)
+    assert Eq.Utils.eq?(fast_pass_a, fast_pass_b, eq_ride)
+    assert Eq.Utils.eq?(fast_pass_a, fast_pass_b, eq_time)
+    assert Eq.Utils.eq?(fast_pass_a, fast_pass_b, eq_both)
+
+    datetime_2 = Faker.DateTime.backward(1)
+    fast_pass_a = FastPass.change(fast_pass_a, %{time: datetime_2})
+    assert Eq.Utils.eq?(fast_pass_a, fast_pass_b, eq_ride)
+    refute Eq.Utils.eq?(fast_pass_a, fast_pass_b, eq_time)
+    refute Eq.Utils.eq?(fast_pass_a, fast_pass_b, eq_both)
+  end
 end
