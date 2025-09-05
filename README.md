@@ -25,15 +25,18 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
     - [x] Transform Inputs Before Matching
     - [x] Harness Equality for Collections
     - [x] What We’ve Learned
-- [x] Chapter 3: Create Flexible Ordering with Protocols ([work/chapter-3](https://github.com/camatcode/cam_funpark/tree/work/chapter-3))
+- [x] Chapter 3: Create Flexible Ordering with
+  Protocols ([work/chapter-3](https://github.com/camatcode/cam_funpark/tree/work/chapter-3))
     - [x] Define Order with a Protocol
     - [x] Implement Order for FunPark Contexts
     - [x] Transform Inputs Before Comparison
     - [x] Harness Order for Collections
     - [x] Reverse the Order
     - [x] Reduce Repetitive Code with Macros
-        - 📝: It's unwise to drop folks into metaprogramming without more detail
+        - 📝: It's unwise to drop folks into meta-programming without more detail
     - [x] What We’ve Learned
+        - 📝: "Do you fully understand `contramap/1`?" No, in fact, it seems to be an unnecessary complication, but I'm
+          pressing forward until I recognize why its useful, or what I can replace it with
 - [ ] Chapter 4: Combine with Monoids ([work/chapter-4](https://github.com/camatcode/cam_funpark/tree/work/chapter-4))
     - [ ] Define the Protocol
     - [ ] Combine Numbers with Sum
