@@ -30,4 +30,5 @@ defmodule FunPark.FastPass do
   def ride(%FastPass{ride: ride}), do: ride
   def eq_time, do: Eq.Utils.contramap(&time/1)
   def eq_ride, do: Eq.Utils.contramap(&ride/1)
+  def eq_ride_and_time, do: Eq.Utils.concat_all([eq_ride(), eq_time()])
 end
