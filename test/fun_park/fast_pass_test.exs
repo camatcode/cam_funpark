@@ -101,5 +101,20 @@ defmodule FunPark.FastPassTest do
     assert Eq.Utils.eq?(fast_pass_a, fast_pass_b, eq_ride)
     refute Eq.Utils.eq?(fast_pass_a, fast_pass_b, eq_time)
     refute Eq.Utils.eq?(fast_pass_a, fast_pass_b, eq_both)
+
+    # page 55 - 56
+    datetime = Faker.DateTime.forward(1)
+    tea_cup = build(:ride, name: "Tea Cup")
+    pass_a = build(:fast_pass, time: datetime, ride: tea_cup)
+    pass_b = build(:fast_pass, time: datetime, ride: tea_cup)
+
+    refute Eq.Utils.eq?(pass_a, pass_b)
+    dup_pass_check = FastPass.duplicate_pass()
+    assert Eq.Utils.eq?(pass_a, pass_b, dup_pass_check)
+
+    mansion = build(:ride, name: "Haunted Mansion")
+    pass_a_changed = FastPass.change(pass_a, %{ride: mansion})
+    assert Eq.Utils.eq?(pass_a, pass_a_changed, dup_pass_check)
+    refute Eq.Utils.eq?(pass_b, pass_a_changed, dup_pass_check)
   end
 end

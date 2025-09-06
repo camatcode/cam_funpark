@@ -5,6 +5,7 @@ defmodule FunPark.Eq.Utils do
 
   alias FunPark.Eq
   alias FunPark.Monoid.Eq.All
+  alias FunPark.Monoid.Eq.Any
 
   # takes an existing comparator and adapts it to work on a different type
   # by applying a function *before* comparing values
@@ -24,7 +25,11 @@ defmodule FunPark.Eq.Utils do
 
   def append_all(a, b), do: m_append(%All{}, a, b)
 
+  def append_any(a, b), do: m_append(%Any{}, a, b)
+
   def concat_all(eq_list) when is_list(eq_list), do: m_concat(%All{}, eq_list)
+
+  def concat_any(eq_list) when is_list(eq_list), do: m_concat(%Any{}, eq_list)
 
   def to_eq_map(%{eq?: eq_fun, not_eq?: not_eq_fun} = eq_map) when is_function(eq_fun, 2) and is_function(not_eq_fun, 2) do
     eq_map
