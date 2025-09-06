@@ -1,6 +1,8 @@
 defmodule FunPark.Ord.Utils do
   @moduledoc false
 
+  import FunPark.Monoid.Utils, only: [m_append: 3, m_concat: 2]
+
   alias FunPark.Ord
 
   def contramap(f, ord \\ Ord) do
@@ -36,6 +38,10 @@ defmodule FunPark.Ord.Utils do
   end
 
   def comparator(ord_module), do: fn a, b -> compare(a, b, ord_module) != :gt end
+
+  def append(a, b), do: m_append(%FunPark.Monoid.Ord{}, a, b)
+
+  def concat(ord_list) when is_list(ord_list), do: m_concat(%FunPark.Monoid.Ord{}, ord_list)
 
   def to_ord_map(%{lt?: lt_f, le?: le_f, gt?: gt_f, ge?: ge_f} = ord_map)
       when is_function(lt_f, 2) and is_function(le_f, 2) and is_function(gt_f, 2) and is_function(ge_f, 2),

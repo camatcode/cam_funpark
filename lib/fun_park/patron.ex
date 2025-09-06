@@ -37,10 +37,14 @@ defmodule FunPark.Patron do
   end
 
   def ord_by_ticket_tier, do: Ord.Utils.contramap(&get_ticket_tier_priority/1)
+  def ord_by_reward_points, do: Ord.Utils.contramap(&get_reward_points/1)
+  def ord_by_priority, do: Ord.Utils.concat([ord_by_ticket_tier(), ord_by_reward_points(), Ord])
 
   defp tier_priority(:vip), do: 3
   defp tier_priority(:premium), do: 2
   defp tier_priority(:basic), do: 1
   defp tier_priority(_), do: 0
+
   defp get_ticket_tier_priority(%Patron{ticket_tier: tier}), do: tier_priority(tier)
+  defp get_reward_points(%Patron{reward_points: points}), do: points
 end

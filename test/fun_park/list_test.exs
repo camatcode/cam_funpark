@@ -79,4 +79,23 @@ defmodule FunPark.ListTest do
     reverse_ticket_ord = Ord.Utils.reverse(ticket_ord)
     assert [alice, beth] == FPList.sort([alice, beth], reverse_ticket_ord)
   end
+
+  test "Chapter 4. Combine Order" do
+    # page 59 - 61
+    alice = build(:patron, name: "Alice", age: 15, height: 50, reward_points: 50, ticket_tier: :premium)
+    beth = build(:patron, name: "Beth", age: 16, height: 55, reward_points: 20, ticket_tier: :vip)
+    charles = build(:patron, name: "Charles", age: 14, height: 60, reward_points: 50, ticket_tier: :premium)
+
+    # alphabetically
+    assert [alice, beth, charles] == FPList.sort([charles, beth, alice])
+
+    ord_ticket = Patron.ord_by_ticket_tier()
+    ord_reward_points = Patron.ord_by_reward_points()
+    ord_priority = Ord.Utils.concat([ord_ticket, ord_reward_points])
+    assert [charles, alice, beth] == FPList.sort([charles, beth, alice], ord_priority)
+
+    # patrons with the same priority should still be sorted by name
+    ord_priority = Patron.ord_by_priority()
+    assert [alice, charles, beth] == FPList.sort([charles, beth, alice], ord_priority)
+  end
 end

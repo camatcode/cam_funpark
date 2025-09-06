@@ -40,10 +40,12 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
 - [ ] Chapter 4: Combine with Monoids ([work/chapter-4](https://github.com/camatcode/cam_funpark/tree/work/chapter-4))
     - [x] Define the Protocol
     - [x] Combine Numbers with Sum
-    - [ ] Combine Equality
-        - ? Had to implement eq_ride ; did I miss that?
+    - [x] Combine Equality
+        - ❓ Had to implement `eq_ride` ; did I miss that?
         - 📝: It's at this exact point where it's clear im re-implementing Haskel in Elixir.
     - [ ] Combine Order
+        - 📝: pg 59: missing a space "default sort forPatrons"
+        - ❓ Had to implement `ord_by_reward_points` ; did I miss that?
     - [ ] Generalize Maximum
     - [ ] Manage Complexity
     - [ ] What We’ve Learned

@@ -11,7 +11,7 @@ defmodule FunPark.Factory.PatronFactory do
 
         %{
           name: Faker.Person.name(),
-          age: Enum.random(0..100),
+          age: Enum.random(1..100),
           height: Enum.random(0..200),
           ticket_tier: Enum.random(ticket_tiers),
           fast_passes:
