@@ -69,6 +69,19 @@ defmodule FunPark.RideTest do
     assert [haunted_mansion, tea_cup] == FPList.strict_sort(rides, ord_wait_time)
   end
 
+  test "Chapter 5" do
+    # page 72
+    tea_cup = build(:ride, name: "Tea Cup", online: true, wait_time: 100)
+    assert Ride.online?(tea_cup)
+    assert Ride.long_wait?(tea_cup)
+
+    # page 76
+    refute Ride.suggested?(tea_cup)
+
+    tea_cup = Ride.change(tea_cup, %{wait_time: 10})
+    assert Ride.suggested?(tea_cup)
+  end
+
   test "Define your own Rides" do
     random_rides = build_list(1000, :ride)
     refute Enum.empty?(random_rides)

@@ -1,6 +1,8 @@
 defmodule FunPark.Ride do
   @moduledoc false
 
+  import FunPark.Predicate, only: [p_not: 1, p_all: 1]
+
   alias __MODULE__, as: Ride
   alias FunPark.Ord
 
@@ -41,7 +43,13 @@ defmodule FunPark.Ride do
 
   def get_wait_time(%Ride{wait_time: wait_time}), do: wait_time
 
-  def ord_by_wait_time do
-    Ord.Utils.contramap(&get_wait_time/1)
-  end
+  def online?(%Ride{online: online}), do: online
+
+  def long_wait?(%Ride{wait_time: wait_time}), do: wait_time > 30
+
+  def short_wait?, do: p_not(&long_wait?/1)
+
+  def suggested?(%Ride{} = ride), do: p_all([&online?/1, p_not(&long_wait?/1)]).(ride)
+
+  def ord_by_wait_time, do: Ord.Utils.contramap(&get_wait_time/1)
 end
