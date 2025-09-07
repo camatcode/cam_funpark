@@ -67,7 +67,7 @@ defmodule FunPark.PatronTest do
       height: 0,
       ticket_tier: nil,
       fast_passes: [],
-      reward_points: -1.7976931348623157e308,
+      reward_points: Float.min_finite(),
       likes: [],
       dislikes: []
     }

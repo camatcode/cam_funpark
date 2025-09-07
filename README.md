@@ -49,6 +49,7 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
     - [x] Generalize Maximum
         - ❓ Had to implement `Ord.Utils.max/3`: did I miss that?
     - [x] Manage Complexity
+        - ❗ : append in `FunPark.Monoid, for: FunPark.Monoid.Ord` has a cyclomatic complexity of 13
     - [x] What We’ve Learned
 - [ ] Chapter 5: Define Logic with Predicates
     - [ ] Simple Predicates
