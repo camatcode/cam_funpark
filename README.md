@@ -51,7 +51,8 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
     - [x] Manage Complexity
         - ❗ : append in `FunPark.Monoid, for: FunPark.Monoid.Ord` has a cyclomatic complexity of 13
     - [x] What We’ve Learned
-- [ ] Chapter 5: Define Logic with Predicates
+- [ ] Chapter 5: Define Logic with
+  Predicates ([work/chapter-5](https://github.com/camatcode/cam_funpark/tree/work/chapter-5))
     - [ ] Simple Predicates
     - [ ] Combine Predicates
     - [ ] Predicates That Span Contexts
