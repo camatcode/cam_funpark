@@ -1,8 +1,10 @@
 defmodule FunPark.Patron do
   @moduledoc false
   import FunPark.Macros, only: [ord_for: 2]
+  import FunPark.Monoid.Utils, only: [m_concat: 2]
 
   alias __MODULE__, as: Patron
+  alias FunPark.Monoid.Max
   alias FunPark.Ord
 
   defstruct [:id, :name, age: 0, height: 0, ticket_tier: :basic, fast_passes: [], reward_points: 0, likes: [], dislikes: []]
@@ -36,9 +38,14 @@ defmodule FunPark.Patron do
     |> then(&struct(patron, &1))
   end
 
+  def highest_priority(patrons) when is_list(patrons), do: m_concat(max_priority_monoid(), patrons)
+
   def ord_by_ticket_tier, do: Ord.Utils.contramap(&get_ticket_tier_priority/1)
   def ord_by_reward_points, do: Ord.Utils.contramap(&get_reward_points/1)
   def ord_by_priority, do: Ord.Utils.concat([ord_by_ticket_tier(), ord_by_reward_points(), Ord])
+
+  defp priority_empty, do: %Patron{reward_points: Float.min_finite(), ticket_tier: nil}
+  defp max_priority_monoid, do: %Max{value: priority_empty(), ord: ord_by_priority()}
 
   defp tier_priority(:vip), do: 3
   defp tier_priority(:premium), do: 2

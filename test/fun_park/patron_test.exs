@@ -50,4 +50,28 @@ defmodule FunPark.PatronTest do
     beth = Patron.change(beth, %{ticket_tier: :vip})
     assert ticket_ord.gt?.(beth, alice)
   end
+
+  test "Chapter 4. Combine with Monoids" do
+    # page 64 - 65
+    alice = build(:patron, name: "Alice", ticket_tier: :basic, reward_points: 0)
+    beth = build(:patron, name: "Beth", ticket_tier: :basic, reward_points: 100)
+    assert beth == Patron.highest_priority([alice, beth])
+    alice = Patron.change(alice, %{ticket_tier: :vip})
+    assert alice == Patron.highest_priority([alice, beth])
+    assert beth == Patron.highest_priority([beth])
+
+    sentinel = %FunPark.Patron{
+      id: nil,
+      name: nil,
+      age: 0,
+      height: 0,
+      ticket_tier: nil,
+      fast_passes: [],
+      reward_points: -1.7976931348623157e308,
+      likes: [],
+      dislikes: []
+    }
+
+    assert sentinel == Patron.highest_priority([])
+  end
 end

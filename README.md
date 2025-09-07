@@ -37,7 +37,7 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
     - [x] What We’ve Learned
         - 📝: "Do you fully understand `contramap/1`?" No, in fact, it seems to be an unnecessary complication, but I'm
           pressing forward until I recognize why its useful, or what I can replace it with
-- [ ] Chapter 4: Combine with Monoids ([work/chapter-4](https://github.com/camatcode/cam_funpark/tree/work/chapter-4))
+- [x] Chapter 4: Combine with Monoids ([work/chapter-4](https://github.com/camatcode/cam_funpark/tree/work/chapter-4))
     - [x] Define the Protocol
     - [x] Combine Numbers with Sum
     - [x] Combine Equality
@@ -46,10 +46,10 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
     - [x] Combine Order
         - 📝: pg 59: missing a space "default sort forPatrons"
         - ❓ Had to implement `ord_by_reward_points` ; did I miss that?
-    - [ ] Generalize Maximum
+    - [x] Generalize Maximum
         - ❓ Had to implement `Ord.Utils.max/3`: did I miss that?
-    - [ ] Manage Complexity
-    - [ ] What We’ve Learned
+    - [x] Manage Complexity
+    - [x] What We’ve Learned
 - [ ] Chapter 5: Define Logic with Predicates
     - [ ] Simple Predicates
     - [ ] Combine Predicates
