@@ -43,10 +43,11 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
     - [x] Combine Equality
         - ❓ Had to implement `eq_ride` ; did I miss that?
         - 📝: It's at this exact point where it's clear im re-implementing Haskel in Elixir.
-    - [ ] Combine Order
+    - [x] Combine Order
         - 📝: pg 59: missing a space "default sort forPatrons"
         - ❓ Had to implement `ord_by_reward_points` ; did I miss that?
     - [ ] Generalize Maximum
+        - ❓ Had to implement `Ord.Utils.max/3`: did I miss that?
     - [ ] Manage Complexity
     - [ ] What We’ve Learned
 - [ ] Chapter 5: Define Logic with Predicates

@@ -58,3 +58,76 @@ defimpl FunPark.Monoid, for: FunPark.Monoid.Eq.Any do
     %{eq?: eq?, not_eq?: not_eq?}
   end
 end
+
+defimpl FunPark.Monoid, for: FunPark.Monoid.Ord do
+  alias FunPark.Monoid.Ord
+  alias FunPark.Ord.Utils
+
+  def identity(_), do: %Ord{}
+
+  def append(%Ord{} = ord1, %Ord{} = ord2) do
+    %Ord{
+      lt?: fn a, b ->
+        cond do
+          ord1.lt?.(a, b) -> true
+          ord1.gt?.(a, b) -> false
+          true -> ord2.lt?.(a, b)
+        end
+      end,
+      le?: fn a, b ->
+        cond do
+          ord1.lt?.(a, b) -> true
+          ord1.gt?.(a, b) -> false
+          true -> ord2.le?.(a, b)
+        end
+      end,
+      gt?: fn a, b ->
+        cond do
+          ord1.gt?.(a, b) -> true
+          ord1.lt?.(a, b) -> false
+          true -> ord2.gt?.(a, b)
+        end
+      end,
+      ge?: fn a, b ->
+        cond do
+          ord1.gt?.(a, b) -> true
+          ord1.lt?.(a, b) -> false
+          true -> ord2.ge?.(a, b)
+        end
+      end
+    }
+  end
+
+  def wrap(%Ord{}, ord) do
+    ord = Utils.to_ord_map(ord)
+
+    %Ord{
+      lt?: ord.lt?,
+      le?: ord.le?,
+      gt?: ord.gt?,
+      ge?: ord.ge?
+    }
+  end
+
+  def unwrap(%Ord{lt?: lt?, le?: le?, gt?: gt?, ge?: ge?}) do
+    %Ord{
+      lt?: lt?,
+      le?: le?,
+      gt?: gt?,
+      ge?: ge?
+    }
+  end
+end
+
+defimpl FunPark.Monoid, for: FunPark.Monoid.Max do
+  alias FunPark.Monoid.Max
+  alias FunPark.Ord.Utils
+
+  def identity(%Max{value: min_value, ord: ord}), do: %Max{value: min_value, ord: ord}
+
+  def append(%Max{value: a, ord: ord}, %Max{value: b}), do: %Max{value: Utils.max(a, b, ord), ord: ord}
+
+  def wrap(%Max{ord: ord}, value), do: %Max{value: value, ord: Utils.to_ord_map(ord)}
+
+  def unwrap(%Max{value: value}), do: value
+end

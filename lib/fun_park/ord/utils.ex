@@ -37,6 +37,13 @@ defmodule FunPark.Ord.Utils do
     }
   end
 
+  def max(a, b, ord \\ Ord) do
+    case compare(a, b, ord) do
+      :lt -> b
+      _ -> a
+    end
+  end
+
   def comparator(ord_module), do: fn a, b -> compare(a, b, ord_module) != :gt end
 
   def append(a, b), do: m_append(%FunPark.Monoid.Ord{}, a, b)

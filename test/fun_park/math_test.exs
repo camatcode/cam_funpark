@@ -12,5 +12,13 @@ defmodule FunPark.MathTest do
     assert 6 == Math.sum([1, 2, 3])
     assert 3 == Math.sum([3])
     assert 0 == Math.sum([])
+
+    # page 63
+    assert 2 == Math.max(1, 2)
+    log = [20, 30, 10, 20, 15, 10, 20]
+    assert 30 == Math.max(log)
+
+    assert 3 == Math.max([3])
+    assert Float.min_finite() == Math.max([])
   end
 end
