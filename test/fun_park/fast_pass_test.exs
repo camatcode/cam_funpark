@@ -4,6 +4,8 @@ defmodule FunPark.FastPassTest do
   alias FunPark.Eq
   alias FunPark.FastPass
   alias FunPark.Ord
+  alias FunPark.Patron
+  alias FunPark.Ride
 
   @moduletag :capture_log
 
@@ -116,5 +118,28 @@ defmodule FunPark.FastPassTest do
     pass_a_changed = FastPass.change(pass_a, %{ride: mansion})
     assert Eq.Utils.eq?(pass_a, pass_a_changed, dup_pass_check)
     refute Eq.Utils.eq?(pass_b, pass_a_changed, dup_pass_check)
+  end
+
+  test "Chapter 5" do
+    # page 87
+    fast_pass = build(:fast_pass)
+
+    alice =
+      build(:patron, name: "Alice")
+      |> Patron.add_fast_pass(fast_pass)
+
+    assert Ride.fast_pass?(alice, fast_pass.ride)
+
+    # page 89 - 90
+    haunted_mansion = Ride.make("Haunted Mansion", min_age: 14)
+    fast_pass = build(:fast_pass, ride: haunted_mansion)
+    alice = build(:patron, name: "Alice", age: 13, height: 150, fast_passes: [fast_pass])
+    beth = build(:patron, name: "Beth", age: 15, height: 110)
+
+    refute Ride.fast_pass_lane?(alice, haunted_mansion)
+    refute Ride.fast_pass_lane?(beth, haunted_mansion)
+
+    beth = Patron.change(beth, %{ticket_tier: :vip})
+    assert Ride.fast_pass_lane?(beth, haunted_mansion)
   end
 end

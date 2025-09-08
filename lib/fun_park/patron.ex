@@ -4,6 +4,7 @@ defmodule FunPark.Patron do
   import FunPark.Monoid.Utils, only: [m_concat: 2]
 
   alias __MODULE__, as: Patron
+  alias FunPark.List, as: FPList
   alias FunPark.Monoid.Max
   alias FunPark.Ord
 
@@ -38,8 +39,23 @@ defmodule FunPark.Patron do
     |> then(&struct(patron, &1))
   end
 
+  def add_fast_pass(%Patron{} = patron, fast_pass) do
+    fast_passes = FPList.union([fast_pass], get_fast_passes(patron))
+    change(patron, %{fast_passes: fast_passes})
+  end
+
+  def remove_fast_pass(%Patron{} = patron, fast_pass) do
+    fast_passes =
+      FPList.difference(get_fast_passes(patron), [fast_pass])
+
+    change(patron, %{fast_passes: fast_passes})
+  end
+
   def get_height(%Patron{height: height}), do: height
   def get_age(%Patron{age: age}), do: age
+  def get_fast_passes(%Patron{fast_passes: f_passes}), do: f_passes
+  def vip?(%Patron{ticket_tier: :vip}), do: true
+  def vip?(_), do: false
 
   def highest_priority(patrons) when is_list(patrons), do: m_concat(max_priority_monoid(), patrons)
 

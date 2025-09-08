@@ -1,10 +1,11 @@
 defmodule FunPark.Ride do
   @moduledoc false
 
-  import FunPark.Predicate, only: [p_not: 1, p_all: 1]
+  import FunPark.Predicate, only: [p_not: 1, p_all: 1, p_any: 1]
   import FunPark.Utils
 
   alias __MODULE__, as: Ride
+  alias FunPark.FastPass
   alias FunPark.Ord
   alias FunPark.Patron
 
@@ -73,5 +74,18 @@ defmodule FunPark.Ride do
 
   def eligible?(%Patron{} = patron, %Ride{} = ride) do
     p_all([curry(&tall_enough?/2).(patron), curry(&old_enough?/2).(patron)]).(ride)
+  end
+
+  def fast_pass?(%Patron{} = patron, %Ride{} = ride) do
+    patron
+    |> Patron.get_fast_passes()
+    |> Enum.any?(&FastPass.valid?(&1, ride))
+  end
+
+  def fast_pass_lane?(%Patron{} = patron, %Ride{} = ride) do
+    has_fast_pass = curry_r(&fast_pass?/2).(ride)
+    is_eligible = curry_r(&eligible?/2).(ride)
+    is_vip = &Patron.vip?/1
+    p_all([is_eligible, p_any([is_vip, has_fast_pass])]).(patron)
   end
 end

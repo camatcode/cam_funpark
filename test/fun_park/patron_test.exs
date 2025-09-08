@@ -74,4 +74,14 @@ defmodule FunPark.PatronTest do
 
     assert sentinel == Patron.highest_priority([])
   end
+
+  test "Chapter 5" do
+    # page 86
+    fast_pass = build(:fast_pass)
+    alice = build(:patron, name: "Alice", fast_passes: [])
+    %{fast_passes: updated} = Patron.add_fast_pass(alice, fast_pass)
+    assert Enum.member?(updated, fast_pass)
+    %{fast_passes: updated} = Patron.remove_fast_pass(alice, fast_pass)
+    refute Enum.member?(updated, fast_pass)
+  end
 end
