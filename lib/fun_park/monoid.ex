@@ -131,3 +131,21 @@ defimpl FunPark.Monoid, for: FunPark.Monoid.Max do
 
   def unwrap(%Max{value: value}), do: value
 end
+
+defimpl FunPark.Monoid, for: FunPark.Monoid.Predicate.All do
+  alias FunPark.Monoid.Predicate.All
+
+  def identity(_), do: %All{}
+  def append(%All{} = p1, %All{} = p2), do: %All{value: fn value -> p1.value.(value) and p2.value.(value) end}
+  def wrap(%All{}, value) when is_function(value, 1), do: %All{value: value}
+  def unwrap(%All{value: value}), do: value
+end
+
+defimpl FunPark.Monoid, for: FunPark.Monoid.Predicate.Any do
+  alias FunPark.Monoid.Predicate.Any
+
+  def identity(_), do: %Any{}
+  def append(%Any{} = p1, %Any{} = p2), do: %Any{value: fn value -> p1.value.(value) or p2.value.(value) end}
+  def wrap(%Any{}, value) when is_function(value, 1), do: %Any{value: value}
+  def unwrap(%Any{value: value}), do: value
+end

@@ -26,10 +26,15 @@ defmodule FunPark.FastPass do
     |> then(&struct(pass, &1))
   end
 
-  def time(%FastPass{} = pass), do: pass.time
-  def ride(%FastPass{ride: ride}), do: ride
+  def get_time(%FastPass{} = pass), do: pass.time
+  def get_ride(%FastPass{ride: ride}), do: ride
+
+  def valid?(%FastPass{} = pass, %Ride{} = ride) do
+    Eq.Utils.eq?(get_ride(pass), ride)
+  end
+
   def duplicate_pass, do: Eq.Utils.concat_any([Eq, eq_ride_and_time()])
-  def eq_time, do: Eq.Utils.contramap(&time/1)
-  def eq_ride, do: Eq.Utils.contramap(&ride/1)
+  def eq_time, do: Eq.Utils.contramap(&get_time/1)
+  def eq_ride, do: Eq.Utils.contramap(&get_ride/1)
   def eq_ride_and_time, do: Eq.Utils.concat_all([eq_ride(), eq_time()])
 end

@@ -49,16 +49,21 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
     - [x] Generalize Maximum
         - ❓ Had to implement `Ord.Utils.max/3`: did I miss that?
     - [x] Manage Complexity
+        - ❗ : append in `FunPark.Monoid, for: FunPark.Monoid.Ord` has a cyclomatic complexity of 13
     - [x] What We’ve Learned
-- [ ] Chapter 5: Define Logic with Predicates
-    - [ ] Simple Predicates
-    - [ ] Combine Predicates
-    - [ ] Predicates That Span Contexts
-    - [ ] Compose Multi-Arity Functions with Curry
-    - [ ] Harness Predicates for Collections
-    - [ ] Model the FastPass
-    - [ ] Fold Conditional Logic
-    - [ ] What We’ve Learned
+- [ ] Chapter 5: Define Logic with
+  Predicates ([work/chapter-5](https://github.com/camatcode/cam_funpark/tree/work/chapter-5))
+    - [x] Simple Predicates
+    - [x] Combine Predicates
+    - [x] Predicates That Span Contexts
+        - ❗ `p_all([&tall_enough?/2, &old_enough?/2]).(patron, ride)` is problematic because the wrap demands the
+          functions are unary.
+            - I took `curry` from the next section; which worked.
+    - [x] Compose Multi-Arity Functions with Curry
+    - [x] Harness Predicates for Collections
+    - [x] Model the FastPass
+    - [x] Fold Conditional Logic
+    - [x] What We’ve Learned
 - [ ] Chapter 6: Compose in Context with Monads
     - [ ] Build the Monad
     - [ ] Model Neutrality with Identity

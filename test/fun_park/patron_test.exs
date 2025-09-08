@@ -67,11 +67,21 @@ defmodule FunPark.PatronTest do
       height: 0,
       ticket_tier: nil,
       fast_passes: [],
-      reward_points: -1.7976931348623157e308,
+      reward_points: Float.min_finite(),
       likes: [],
       dislikes: []
     }
 
     assert sentinel == Patron.highest_priority([])
+  end
+
+  test "Chapter 5" do
+    # page 86
+    fast_pass = build(:fast_pass)
+    alice = build(:patron, name: "Alice", fast_passes: [])
+    %{fast_passes: updated} = Patron.add_fast_pass(alice, fast_pass)
+    assert Enum.member?(updated, fast_pass)
+    %{fast_passes: updated} = Patron.remove_fast_pass(alice, fast_pass)
+    refute Enum.member?(updated, fast_pass)
   end
 end

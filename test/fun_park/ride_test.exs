@@ -69,6 +69,88 @@ defmodule FunPark.RideTest do
     assert [haunted_mansion, tea_cup] == FPList.strict_sort(rides, ord_wait_time)
   end
 
+  test "Chapter 5" do
+    # page 72
+    tea_cup = build(:ride, name: "Tea Cup", online: true, wait_time: 100)
+    assert Ride.online?(tea_cup)
+    assert Ride.long_wait?(tea_cup)
+
+    # page 76
+    refute Ride.suggested?(tea_cup)
+
+    tea_cup = Ride.change(tea_cup, %{wait_time: 10})
+    assert Ride.suggested?(tea_cup)
+
+    # page 77
+    roller_mtn = build(:ride, name: "Roller Mountain", min_height: 120, min_age: 12, online: true, wait_time: 10)
+    alice = build(:patron, name: "Alice", age: 13, height: 119)
+
+    assert Ride.old_enough?(alice, roller_mtn)
+    refute Ride.tall_enough?(alice, roller_mtn)
+    refute Ride.eligible?(alice, roller_mtn)
+
+    alice = FunPark.Patron.change(alice, %{height: 121})
+    assert Ride.eligible?(alice, roller_mtn)
+
+    # page 80
+    assert Ride.suggested?(alice, roller_mtn)
+    roller_mtn = Ride.change(roller_mtn, %{online: false})
+    refute Ride.suggested?(alice, roller_mtn)
+
+    # page 81 -83
+    thunder_loop = Ride.make("Thunder Loop")
+    ghost_hollow = Ride.make("Ghost Hollow", online: false)
+    rocket_ride = Ride.make("Rocket Ridge")
+    jungle_river = Ride.make("Jungle River", online: false)
+    nebula_falls = Ride.make("Nebula Falls")
+    timber_twister = Ride.make("Timber Twister", online: false)
+
+    rides = [thunder_loop, ghost_hollow, rocket_ride, jungle_river, nebula_falls, timber_twister]
+    online? = &Ride.online?/1
+
+    refute Enum.all?(rides, online?)
+    assert Enum.any?(rides, online?)
+    assert 3 == Enum.count(rides, online?)
+    assert thunder_loop == Enum.find(rides, online?)
+    assert 0 == Enum.find_index(rides, online?)
+    assert [thunder_loop, rocket_ride, nebula_falls] == Enum.filter(rides, online?)
+    assert [ghost_hollow, jungle_river, timber_twister] == Enum.reject(rides, online?)
+    assert [thunder_loop] == Enum.take_while(rides, online?)
+    assert tl(rides) == Enum.drop_while(rides, online?)
+
+    assert {[thunder_loop], tl(rides)} == Enum.split_while(rides, online?)
+
+    # page 84 - 85
+    tea_cup = Ride.make("Tea Cup")
+    roller_mtn = Ride.make("Roller Mountain", min_height: 120)
+    haunted_mansion = Ride.make("Haunted Mansion", min_age: 14)
+    rides = [tea_cup, roller_mtn, haunted_mansion]
+    alice = build(:patron, name: "Alice", age: 13, height: 150)
+    beth = build(:patron, name: "Beth", age: 15, height: 110)
+
+    assert [tea_cup, roller_mtn] == Ride.suggested_rides(alice, rides)
+    assert [tea_cup, haunted_mansion] == Ride.suggested_rides(beth, rides)
+
+    tea_cup = Ride.change(tea_cup, %{wait_time: 40})
+    rides = [tea_cup, roller_mtn, haunted_mansion]
+
+    assert [haunted_mansion] == Ride.suggested_rides(beth, rides)
+
+    # page 90 - 91
+    tea_cup = build(:ride, name: "Tea Cup", online: true, wait_time: 100)
+    refute Ride.suggested?(tea_cup)
+
+    yes_or_no = fn val, pred ->
+      FunPark.Foldable.fold_l(
+        fn -> pred.(val) end,
+        fn -> "Yes" end,
+        fn -> "No" end
+      )
+    end
+
+    assert "No" == yes_or_no.(tea_cup, &Ride.suggested?/1)
+  end
+
   test "Define your own Rides" do
     random_rides = build_list(1000, :ride)
     refute Enum.empty?(random_rides)
