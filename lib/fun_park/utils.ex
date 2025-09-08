@@ -1,4 +1,5 @@
 defmodule FunPark.Utils do
+  @moduledoc false
   def curry(fun) when is_function(fun) do
     arity = :erlang.fun_info(fun, :arity) |> elem(1)
     curry(fun, arity, [])

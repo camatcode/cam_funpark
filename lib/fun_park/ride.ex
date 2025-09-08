@@ -57,6 +57,10 @@ defmodule FunPark.Ride do
     p_all([&suggested?/1, curry(&eligible?/2).(patron)]).(ride)
   end
 
+  def suggested_rides(%Patron{} = patron, rides) when is_list(rides) do
+    Enum.filter(rides, &suggested?(patron, &1))
+  end
+
   def ord_by_wait_time, do: Ord.Utils.contramap(&get_wait_time/1)
 
   def tall_enough?(%Patron{} = patron, %Ride{min_height: min_height}) do

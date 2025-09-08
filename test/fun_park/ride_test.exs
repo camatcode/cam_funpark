@@ -119,6 +119,22 @@ defmodule FunPark.RideTest do
     assert tl(rides) == Enum.drop_while(rides, online?)
 
     assert {[thunder_loop], tl(rides)} == Enum.split_while(rides, online?)
+
+    # page 84 - 85
+    tea_cup = Ride.make("Tea Cup")
+    roller_mtn = Ride.make("Roller Mountain", min_height: 120)
+    haunted_mansion = Ride.make("Haunted Mansion", min_age: 14)
+    rides = [tea_cup, roller_mtn, haunted_mansion]
+    alice = build(:patron, name: "Alice", age: 13, height: 150)
+    beth = build(:patron, name: "Beth", age: 15, height: 110)
+
+    assert [tea_cup, roller_mtn] == Ride.suggested_rides(alice, rides)
+    assert [tea_cup, haunted_mansion] == Ride.suggested_rides(beth, rides)
+
+    tea_cup = Ride.change(tea_cup, %{wait_time: 40})
+    rides = [tea_cup, roller_mtn, haunted_mansion]
+
+    assert [haunted_mansion] == Ride.suggested_rides(beth, rides)
   end
 
   test "Define your own Rides" do
