@@ -53,9 +53,12 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
     - [x] What We’ve Learned
 - [ ] Chapter 5: Define Logic with
   Predicates ([work/chapter-5](https://github.com/camatcode/cam_funpark/tree/work/chapter-5))
-    - [ ] Simple Predicates
-    - [ ] Combine Predicates
-    - [ ] Predicates That Span Contexts
+    - [x] Simple Predicates
+    - [x] Combine Predicates
+    - [x] Predicates That Span Contexts
+        - ❗ `p_all([&tall_enough?/2, &old_enough?/2]).(patron, ride)` is problematic because the wrap demands the
+          functions are unary.
+            - I took `curry` from the next section; which worked.
     - [ ] Compose Multi-Arity Functions with Curry
     - [ ] Harness Predicates for Collections
     - [ ] Model the FastPass

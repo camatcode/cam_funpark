@@ -80,6 +80,45 @@ defmodule FunPark.RideTest do
 
     tea_cup = Ride.change(tea_cup, %{wait_time: 10})
     assert Ride.suggested?(tea_cup)
+
+    # page 77
+    roller_mtn = build(:ride, name: "Roller Mountain", min_height: 120, min_age: 12, online: true, wait_time: 10)
+    alice = build(:patron, name: "Alice", age: 13, height: 119)
+
+    assert Ride.old_enough?(alice, roller_mtn)
+    refute Ride.tall_enough?(alice, roller_mtn)
+    refute Ride.eligible?(alice, roller_mtn)
+
+    alice = FunPark.Patron.change(alice, %{height: 121})
+    assert Ride.eligible?(alice, roller_mtn)
+
+    # page 80
+    assert Ride.suggested?(alice, roller_mtn)
+    roller_mtn = Ride.change(roller_mtn, %{online: false})
+    refute Ride.suggested?(alice, roller_mtn)
+
+    # page 81 -83
+    thunder_loop = Ride.make("Thunder Loop")
+    ghost_hollow = Ride.make("Ghost Hollow", online: false)
+    rocket_ride = Ride.make("Rocket Ridge")
+    jungle_river = Ride.make("Jungle River", online: false)
+    nebula_falls = Ride.make("Nebula Falls")
+    timber_twister = Ride.make("Timber Twister", online: false)
+
+    rides = [thunder_loop, ghost_hollow, rocket_ride, jungle_river, nebula_falls, timber_twister]
+    online? = &Ride.online?/1
+
+    refute Enum.all?(rides, online?)
+    assert Enum.any?(rides, online?)
+    assert 3 == Enum.count(rides, online?)
+    assert thunder_loop == Enum.find(rides, online?)
+    assert 0 == Enum.find_index(rides, online?)
+    assert [thunder_loop, rocket_ride, nebula_falls] == Enum.filter(rides, online?)
+    assert [ghost_hollow, jungle_river, timber_twister] == Enum.reject(rides, online?)
+    assert [thunder_loop] == Enum.take_while(rides, online?)
+    assert tl(rides) == Enum.drop_while(rides, online?)
+
+    assert {[thunder_loop], tl(rides)} == Enum.split_while(rides, online?)
   end
 
   test "Define your own Rides" do

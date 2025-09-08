@@ -2,9 +2,11 @@ defmodule FunPark.Ride do
   @moduledoc false
 
   import FunPark.Predicate, only: [p_not: 1, p_all: 1]
+  import FunPark.Utils
 
   alias __MODULE__, as: Ride
   alias FunPark.Ord
+  alias FunPark.Patron
 
   defstruct [
     :id,
@@ -51,5 +53,21 @@ defmodule FunPark.Ride do
 
   def suggested?(%Ride{} = ride), do: p_all([&online?/1, p_not(&long_wait?/1)]).(ride)
 
+  def suggested?(%Patron{} = patron, %Ride{} = ride) do
+    p_all([&suggested?/1, curry(&eligible?/2).(patron)]).(ride)
+  end
+
   def ord_by_wait_time, do: Ord.Utils.contramap(&get_wait_time/1)
+
+  def tall_enough?(%Patron{} = patron, %Ride{min_height: min_height}) do
+    Patron.get_height(patron) >= min_height
+  end
+
+  def old_enough?(%Patron{} = patron, %Ride{min_age: min_age}) do
+    Patron.get_age(patron) >= min_age
+  end
+
+  def eligible?(%Patron{} = patron, %Ride{} = ride) do
+    p_all([curry(&tall_enough?/2).(patron), curry(&old_enough?/2).(patron)]).(ride)
+  end
 end

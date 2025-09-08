@@ -38,6 +38,9 @@ defmodule FunPark.Patron do
     |> then(&struct(patron, &1))
   end
 
+  def get_height(%Patron{height: height}), do: height
+  def get_age(%Patron{age: age}), do: age
+
   def highest_priority(patrons) when is_list(patrons), do: m_concat(max_priority_monoid(), patrons)
 
   def ord_by_ticket_tier, do: Ord.Utils.contramap(&get_ticket_tier_priority/1)
