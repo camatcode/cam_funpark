@@ -135,6 +135,20 @@ defmodule FunPark.RideTest do
     rides = [tea_cup, roller_mtn, haunted_mansion]
 
     assert [haunted_mansion] == Ride.suggested_rides(beth, rides)
+
+    # page 90 - 91
+    tea_cup = build(:ride, name: "Tea Cup", online: true, wait_time: 100)
+    refute Ride.suggested?(tea_cup)
+
+    yes_or_no = fn val, pred ->
+      FunPark.Foldable.fold_l(
+        fn -> pred.(val) end,
+        fn -> "Yes" end,
+        fn -> "No" end
+      )
+    end
+
+    assert "No" == yes_or_no.(tea_cup, &Ride.suggested?/1)
   end
 
   test "Define your own Rides" do

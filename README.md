@@ -59,11 +59,11 @@ from [Advanced Functional Programming with Elixir by Joseph Koski](https://pragp
         - ❗ `p_all([&tall_enough?/2, &old_enough?/2]).(patron, ride)` is problematic because the wrap demands the
           functions are unary.
             - I took `curry` from the next section; which worked.
-    - [ ] Compose Multi-Arity Functions with Curry
-    - [ ] Harness Predicates for Collections
-    - [ ] Model the FastPass
-    - [ ] Fold Conditional Logic
-    - [ ] What We’ve Learned
+    - [x] Compose Multi-Arity Functions with Curry
+    - [x] Harness Predicates for Collections
+    - [x] Model the FastPass
+    - [x] Fold Conditional Logic
+    - [x] What We’ve Learned
 - [ ] Chapter 6: Compose in Context with Monads
     - [ ] Build the Monad
     - [ ] Model Neutrality with Identity

@@ -131,7 +131,7 @@ defmodule FunPark.FastPassTest do
     assert Ride.fast_pass?(alice, fast_pass.ride)
 
     # page 89 - 90
-    haunted_mansion = Ride.make("Haunted Mansion", min_age: 14)
+    haunted_mansion = Ride.make("Haunted Mansion", min_age: 14, min_height: 1)
     fast_pass = build(:fast_pass, ride: haunted_mansion)
     alice = build(:patron, name: "Alice", age: 13, height: 150, fast_passes: [fast_pass])
     beth = build(:patron, name: "Beth", age: 15, height: 110)
